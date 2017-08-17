@@ -75,47 +75,51 @@ class pmSpider(CommonSpider):
         #x = self.parse_with_rules(response, self.list_css_rules_for_item, dict)
         cityItem= PmItem()
         cityItem["iscity"]=1
-        cityItem["city"]=response.css("h2::text").extract_first()
+        cityItem["monitortime"]=response.css("div.live_data_time p::text").extract_first("_")
+        cityItem["city"]=response.css("h2::text").extract_first("_")
         cityItem["positionname"]=cityItem["city"]
-        cityItem["aqi"]=response.css("div.value::text").extract()[0]
-        cityItem["pm25"]= response.css("div.value::text").extract()[1]
-        cityItem["pm10"] = response.css("div.value::text").extract()[2]
-        cityItem["co"] = response.css("div.value::text").extract()[3]
-        cityItem["no2"] = response.css("div.value::text").extract()[4]
-        cityItem["o3"] = response.css("div.value::text").extract()[5]
-        cityItem["o3_8h"] = response.css("div.value::text").extract()[6]
-        cityItem["so2"] = response.css("div.value::text").extract()[7]
-        cityItem["pollutantlevel"] = response.css("h4::text").extract_first()
-        cityItem["primarypollutant"] = response.css(".primary_pollutant p::text").extract_first()
-        info(cityItem)
+        tmpValue=response.css("div.value")
+        cityItem["aqi"]=tmpValue[0].css("::text").extract_first("_")
+        cityItem["pm25"]= tmpValue[1].css("::text").extract_first("_")
+        cityItem["pm10"] = tmpValue[2].css("::text").extract_first("_")
+        cityItem["co"] = tmpValue[3].css("::text").extract_first("_")
+        cityItem["no2"] = tmpValue[4].css("::text").extract_first("_")
+        cityItem["o3"] = tmpValue[5].css("::text").extract_first("_")
+        cityItem["o3_8h"] = tmpValue[6].css("::text").extract_first("_")
+        cityItem["so2"] = tmpValue[7].css("::text").extract_first("_")
+        cityItem["pollutantlevel"] = response.css("h4::text").extract_first("_")
+        cityItem["primarypollutant"] = response.css(".primary_pollutant p::text").extract_first("_")
+        #info(cityItem)
         result.append(cityItem)
         yield cityItem
         #yield cityItem
         for it in response.css("#detail-data tbody tr"):
-            try :
-                tmp = it.css("td::text").extract()
+        #try :
+            td = it.css("td")
+            if len(td) == 11:
                 subItem=PmItem()
                 subItem["iscity"] = 2
-                subItem["city"] = response.css("h2::text").extract_first()
-                subItem["positionname"]=tmp[0]
-                subItem["aqi"] = tmp[1]
-                subItem["pm25"] = tmp[4]
-                subItem["pm10"] = tmp[5]
-                subItem["co"] = tmp[6]
-                subItem["no2"] = tmp[7]
-                subItem["o3"] =tmp[8]
-                subItem["o3_8h"] = tmp[9]
-                subItem["so2"] = tmp[10]
-                subItem["pollutantlevel"]=tmp[2]
-                subItem["primarypollutant"]=tmp[3]
-                info(subItem)
+                subItem["monitortime"] = response.css("div.live_data_time p::text").extract_first("_")
+                subItem["city"] = response.css("h2::text").extract_first("_")
+                subItem["positionname"]=td[0].css("::text").extract_first("_")
+                subItem["aqi"] = td[1].css("::text").extract_first("_")
+                subItem["pm25"] = td[4].css("::text").extract_first("_")
+                subItem["pm10"] = td[5].css("::text").extract_first("_")
+                subItem["co"] = td[6].css("::text").extract_first("_")
+                subItem["no2"] = td[7].css("::text").extract_first("_")
+                subItem["o3"] =td[8].css("::text").extract_first("_")
+                subItem["o3_8h"] = td[9].css("::text").extract_first("_")
+                subItem["so2"] = td[10].css("::text").extract_first("_")
+                subItem["pollutantlevel"]=td[2].css("::text").extract_first("_")
+                #subItem["primarypollutant"]=td[3].css("::text").extract_first("_")
+                subItem["primarypollutant"] = "".join(td[3].css("::text").extract())
                 yield subItem
-                result.append(subItem)
-            except:
-                pass
+            #result.append(subItem)
+        #except:
+         #   pass
             #yield  subItem
         #y =self.parse_with_rules(response,self.list_css_rules_for_item,PmItem)
         #info(x)
         #info("yyy" *20)
-        info(result)
+        #info(result)
         #return result

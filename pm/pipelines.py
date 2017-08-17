@@ -23,7 +23,8 @@ class PmPipeline(object):
 def trimsignal(str):
     return str.replace("\n","").replace(" ","")
 def changeOneData(item):
-    it=item
+    it = item
+    it["monitortime"]=it["monitortime"].replace(u"数据更新时间：", "")
     if it["iscity"] == 2:
         it["primarypollutant"] = trimsignal(it["primarypollutant"])
         pass
@@ -63,7 +64,8 @@ class CsvPipeline(object):
     def open_spider(self, spider):
         self.file = open(r'data_utf8.csv', 'w', encoding='utf-8')
         fieldnames = list(PmItem.fields.keys())
-        self.writer = csv.DictWriter(self.file, fieldnames=fieldnames, dialect='excel')
+        #self.writer = csv.DictWriter(self.file, fieldnames=fieldnames, dialect='excel')
+        self.writer = csv.DictWriter(self.file, fieldnames=fieldnames)
         self.writer.writeheader()
 
     def close_spider(self, spider):
@@ -72,4 +74,3 @@ class CsvPipeline(object):
         changeOneData(item)
         if not item.get("city", None) is None:
             self.writer.writerow(dict(item))
-            return dict(item)
