@@ -13,7 +13,7 @@ import sys
 import os
 from os.path import dirname
 path = os.path.abspath(os.path.dirname(__file__))
-print(path)
+#print(path)
 sys.path.append(path)
 BOT_NAME = 'pm'
 
