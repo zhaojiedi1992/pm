@@ -53,14 +53,14 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'pm.middlewares.PmSpiderMiddleware': 543,
+#    pm.middlewares.PmSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-DOWNLOADER_MIDDLEWARES = {
-    'pm.middleware.PmSpiderMiddleware': 543,
-}
+#DOWNLOADER_MIDDLEWARES = {
+   # 'pm.middleware.PmSpiderMiddleware': 543,
+#}
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
