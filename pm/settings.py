@@ -12,9 +12,9 @@
 import sys
 import os
 from os.path import dirname
-path = os.path.abspath(os.path.dirname(__file__))
+#path = os.path.abspath(os.path.dirname(__file__))
 #print(path)
-sys.path.append(path)
+#sys.path.append(path)
 BOT_NAME = 'pm'
 
 SPIDER_MODULES = ['pm.spiders']
@@ -59,7 +59,7 @@ ROBOTSTXT_OBEY = True
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-    'pm.comm.middleware.CustomUserAgentMiddleware': 543,
+    'pm.middleware.PmSpiderMiddleware': 543,
 }
 
 # Enable or disable extensions
