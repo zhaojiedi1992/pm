@@ -94,6 +94,6 @@ LOG_LEVEL = 'INFO'
 
 #DOWNLOAD_DELAY = 0.0001
 DOWNLOAD_DELAY = 4
-EXTENSIONS = {
-    'scrapy_jsonrpc.webservice.WebService': 500,
-}
+#EXTENSIONS = {
+ #   'scrapy_jsonrpc.webservice.WebService': 500,
+#}

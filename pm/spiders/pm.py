@@ -18,7 +18,7 @@ from pm.items import *
 #from pm.comm.log import *
 
 
-class pmSpider(CrawlSpider):
+class pmSpider(scrapy.Spider):
     name = "pm"
     #allowed_domains = ["pm25.in"]
     start_urls = [
