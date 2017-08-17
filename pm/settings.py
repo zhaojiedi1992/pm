@@ -9,12 +9,7 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
-import sys
-import os
-from os.path import dirname
-#path = os.path.abspath(os.path.dirname(__file__))
-#print(path)
-#sys.path.append(path)
+
 BOT_NAME = 'pm'
 
 SPIDER_MODULES = ['pm.spiders']
@@ -70,10 +65,10 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
+#ITEM_PIPELINES = {
     #'pm.pipelines.CsvPipeline': 300,
-    'pm.pipelines.JsonWithEncodingPipeline': 301,
-}
+#    'pm.pipelines.JsonWithEncodingPipeline': 301,
+#}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -99,3 +94,6 @@ LOG_LEVEL = 'INFO'
 
 #DOWNLOAD_DELAY = 0.0001
 DOWNLOAD_DELAY = 4
+EXTENSIONS = {
+    'scrapy_jsonrpc.webservice.WebService': 500,
+}

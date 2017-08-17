@@ -10,11 +10,6 @@ import json
 import csv
 import codecs
 from collections import OrderedDict
-import cx_Oracle
-import re
-from sqlalchemy import *
-from sqlalchemy.sql import select
-from sqlalchemy.schema import *
 #from pm.comm.log import *
 from pm.items import PmItem
 class PmPipeline(object):
@@ -74,3 +69,4 @@ class CsvPipeline(object):
         changeOneData(item)
         if not item.get("city", None) is None:
             self.writer.writerow(dict(item))
+            return item
