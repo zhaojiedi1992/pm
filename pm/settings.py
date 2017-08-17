@@ -71,7 +71,7 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'pm.pipelines.CsvPipeline': 300,
+    #'pm.pipelines.CsvPipeline': 300,
     'pm.pipelines.JsonWithEncodingPipeline': 301,
 }
 
