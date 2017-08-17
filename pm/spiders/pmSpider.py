@@ -2,7 +2,7 @@ import re
 import json
 from urllib.parse import urlparse
 import urllib
-import pdb
+#import pdb
 
 
 from scrapy.selector import Selector
@@ -13,12 +13,12 @@ except:
 from scrapy.utils.response import get_base_url
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor as sle
-from pm.comm.spider import CommonSpider
+#from pm.comm.spider import CommonSpider
 from pm.items import *
-from pm.comm.log import *
+#from pm.comm.log import *
 
 
-class pmSpider(CommonSpider):
+class pmSpider(CrawlSpider):
     name = "pm"
     #allowed_domains = ["pm25.in"]
     start_urls = [
