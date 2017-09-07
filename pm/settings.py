@@ -13,7 +13,7 @@ import sys
 import os
 from os.path import dirname
 path = os.path.abspath(os.path.dirname(__file__))
-print(path)
+#print(path)
 sys.path.append(path)
 BOT_NAME = 'pm'
 
@@ -36,7 +36,7 @@ ROBOTSTXT_OBEY = True
 #DOWNLOAD_DELAY = 3
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
-#CONCURRENT_REQUESTS_PER_IP = 16
+CONCURRENT_REQUESTS_PER_IP = 32
 
 # Disable cookies (enabled by default)
 #COOKIES_ENABLED = False
@@ -72,7 +72,7 @@ DOWNLOADER_MIDDLEWARES = {
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     #'pm.pipelines.CsvPipeline': 300,
-    'pm.pipelines.JsonWithEncodingPipeline': 301,
+    'pm.pipelines.OraclePipeline': 301,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -97,5 +97,5 @@ ITEM_PIPELINES = {
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 LOG_LEVEL = 'INFO'
 
-#DOWNLOAD_DELAY = 0.0001
-DOWNLOAD_DELAY = 4
+DOWNLOAD_DELAY = 0.01
+#DOWNLOAD_DELAY = 4

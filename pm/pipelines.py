@@ -17,6 +17,7 @@ from sqlalchemy.sql import select
 from sqlalchemy.schema import *
 from pm.comm.log import *
 from pm.items import PmItem
+from pm.spiders.pmData import *
 class PmPipeline(object):
     def process_item(self, item, spider):
         return item
@@ -74,3 +75,29 @@ class CsvPipeline(object):
         changeOneData(item)
         if not item.get("city", None) is None:
             self.writer.writerow(dict(item))
+
+class OraclePipeline(object):
+    def open_spider(self, spider):
+        self.tool = databaseTool()
+        self.tool.start()
+        self.info=list(self.tool.getStationInfo())
+        self.file = open(r'data_utf8.log', 'w', encoding='utf-8')
+    def close_spider(self, spider):
+        self.tool.close()
+
+    def process_item(self, item, spider):
+        changeOneData(item)
+        hour = T_BUS_AIR_QUALITY_HOUR()
+        #hour = T_BUS_AIR_QUALITY_HOUR(**item)
+        keys=list(PmItem.fields.keys())
+        for key in keys:
+            try:
+                setattr(hour,key,item[key])
+            except:
+                pass
+        code = [ it  for it in self.info if it[1]==item["city"] and it[2]==item["positionname"]]
+        if len(code) >0:
+            setattr(hour, "stationcode",code[0][0] )
+        else:
+            self.file.write(item["city"]+"," +item["positionname"] +"\n")
+        self.tool.addobj(hour)
