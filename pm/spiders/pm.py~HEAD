@@ -2,7 +2,6 @@ import re
 import json
 from urllib.parse import urlparse
 import urllib
-import datetime
 #import pdb
 
 
@@ -77,7 +76,6 @@ class pmSpider(CrawlSpider):
         cityItem= PmItem()
         cityItem["iscity"]=1
         cityItem["monitortime"]=response.css("div.live_data_time p::text").extract_first("_")
-        cityItem["scrapytime"] = datetime.datetime.now()
         cityItem["city"]=response.css("h2::text").extract_first("_")
         cityItem["positionname"]=cityItem["city"]
         tmpValue=response.css("div.value")
@@ -93,7 +91,7 @@ class pmSpider(CrawlSpider):
         cityItem["primarypollutant"] = response.css(".primary_pollutant p::text").extract_first("_")
         #info(cityItem)
         result.append(cityItem)
-        #yield cityItem
+        yield cityItem
         #yield cityItem
         for it in response.css("#detail-data tbody tr"):
         #try :
@@ -101,7 +99,6 @@ class pmSpider(CrawlSpider):
             if len(td) == 11:
                 subItem=PmItem()
                 subItem["iscity"] = 2
-                subItem["scrapytime"]=datetime.datetime.now()
                 subItem["monitortime"] = response.css("div.live_data_time p::text").extract_first("_")
                 subItem["city"] = response.css("h2::text").extract_first("_")
                 subItem["positionname"]=td[0].css("::text").extract_first("_")

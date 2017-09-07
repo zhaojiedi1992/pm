@@ -10,12 +10,7 @@ import json
 import csv
 import codecs
 from collections import OrderedDict
-import cx_Oracle
-import re
-from sqlalchemy import *
-from sqlalchemy.sql import select
-from sqlalchemy.schema import *
-from pm.comm.log import *
+#from pm.comm.log import *
 from pm.items import PmItem
 from pm.spiders.pmData import *
 class PmPipeline(object):
@@ -43,7 +38,7 @@ def changeOneData(item):
         it["primarypollutant"] = trimsignal(it["primarypollutant"]).replace("首要污染物：", "")
 class JsonWithEncodingPipeline(object):
     def __init__(self):
-        info("."*300)
+        #info("."*300)
         self.file = codecs.open('data_utf8.json', 'w', encoding='utf-8')
         self.file.write("[\n")
         self.isfirst=True
@@ -75,6 +70,7 @@ class CsvPipeline(object):
         changeOneData(item)
         if not item.get("city", None) is None:
             self.writer.writerow(dict(item))
+<<<<<<< HEAD
 
 class OraclePipeline(object):
     def open_spider(self, spider):
@@ -101,3 +97,6 @@ class OraclePipeline(object):
         else:
             self.file.write(item["city"]+"," +item["positionname"] +"\n")
         self.tool.addobj(hour)
+=======
+            return item
+>>>>>>> 4f91f40a29983efdc691d5cfcaf3592745ff8f6c

@@ -9,12 +9,16 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
+<<<<<<< HEAD
 import sys
 import os
 from os.path import dirname
 path = os.path.abspath(os.path.dirname(__file__))
 #print(path)
 sys.path.append(path)
+=======
+
+>>>>>>> 4f91f40a29983efdc691d5cfcaf3592745ff8f6c
 BOT_NAME = 'pm'
 
 SPIDER_MODULES = ['pm.spiders']
@@ -53,14 +57,14 @@ CONCURRENT_REQUESTS_PER_IP = 32
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'pm.middlewares.PmSpiderMiddleware': 543,
+#    pm.middlewares.PmSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-DOWNLOADER_MIDDLEWARES = {
-    'pm.comm.middleware.CustomUserAgentMiddleware': 543,
-}
+#DOWNLOADER_MIDDLEWARES = {
+   # 'pm.middleware.PmSpiderMiddleware': 543,
+#}
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
@@ -70,10 +74,15 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-ITEM_PIPELINES = {
+#ITEM_PIPELINES = {
     #'pm.pipelines.CsvPipeline': 300,
+<<<<<<< HEAD
     'pm.pipelines.OraclePipeline': 301,
 }
+=======
+#    'pm.pipelines.JsonWithEncodingPipeline': 301,
+#}
+>>>>>>> 4f91f40a29983efdc691d5cfcaf3592745ff8f6c
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -97,5 +106,13 @@ ITEM_PIPELINES = {
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 LOG_LEVEL = 'INFO'
 
+<<<<<<< HEAD
 DOWNLOAD_DELAY = 0.01
 #DOWNLOAD_DELAY = 4
+=======
+#DOWNLOAD_DELAY = 0.0001
+DOWNLOAD_DELAY = 4
+#EXTENSIONS = {
+ #   'scrapy_jsonrpc.webservice.WebService': 500,
+#}
+>>>>>>> 4f91f40a29983efdc691d5cfcaf3592745ff8f6c
